@@ -14,46 +14,19 @@ The subsequent counterparts of H&E and Ki-67 only WSIs were trained to generate 
 
 ### Model_syn:
 
-Inception V3 was used to train all models mentioned here (10 epochs, batch size 32).
+Inception V3 was used to train all models mentioned here (10 epochs, batch size 32). Model_syn is the model trained on synaptophysin-Ki67 double immunostained images.
 The code `TrainModel_syn.py` should be run in order to train the model again. 
-Training and validation was done using 80% of WSIs (40 WSIs): 13,525 image tiles
 
-- #tiles in class 0:
-- #tiles in class 1:
-- #tiles in class 2:
-- #tiles in class 3:
-
-Testing was done on 16% of WSIs (8 WSIs): ??? image tiles
-
-(Remaining 4%: 2 WSIs with staining inconsistencies were removed) 
 
 ### Model_he:
 
-The code `TrainModel_he.py` should be run in order to train the model again. 
-Training and validation was done using 80% of WSIs (40 WSIs): 13,525 image tiles
+Model_he is the model trained on H&E-stained images. The code `TrainModel_he.py` should be run in order to train the model again.
 
-- #tiles in class 0:
-- #tiles in class 1:
-- #tiles in class 2:
-- #tiles in class 3:
-
-Testing was done on 16% of WSIs (8 WSIs): ??? image tiles
-
-(Remaining 4%: 2 WSIs with staining inconsistencies were removed) 
 
 ### Model_Ki67:
 
-The code `TrainModel_Ki67.py` should be run in order to train the model again. 
-Training and validation was done using 80% of WSIs (40 WSIs): 13,525 image tiles
+Model_Ki67 is the model trained on Ki67-hematoxylin-stained images. The code `TrainModel_Ki67.py` should be run in order to train the model again. 
 
-- #tiles in class 0:
-- #tiles in class 1:
-- #tiles in class 2:
-- #tiles in class 3:
-
-Testing was done on 16% of WSIs (8 WSIs): ??? image tiles
-
-(Remaining 4%: 2 WSIs with staining inconsistencies were removed) 
 
 ## Testing the models
 
