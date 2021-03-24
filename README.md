@@ -1,6 +1,6 @@
 # Deep-SKIE---USCAP
 
-This repository includes the codes used to generate the results for DG's USCAP abstract
+This repository includes the codes used to generate the results for the Deep-SKIE pipeline mentioned in the paper [Improving the accuracy of gastrointestinal neuroendocrine tumor grading with deep learning](https://www.nature.com/articles/s41598-020-67880-z)
 
 ## Generation of training set
 SKIE was used to generate the following classes of each hot-spot sized tile (500 x 500 µm) obtained via non-overlapping sliding window technique from double-immunostained WSIs (synaptophysin and Ki-67):
@@ -58,3 +58,8 @@ Testing was done on 16% of WSIs (8 WSIs): ??? image tiles
 ## Testing the models
 
 Modify `Test_all_models.py` to specify the test folder and the model (.h5 file) to be used for testing. The results will be saved in a csv file as two columns : filenames and predictions.  
+
+## Display heat-map of predictions
+
+The code `csvToMask.py` (within `Display_results` folder) reads the saved csv file to generate a dictionary of filenames to predictions. These filenames are then used to find the location of the hot-spot sized tile within the WSI and the predicted class names for each tile is used to generate a heatmap.
+
