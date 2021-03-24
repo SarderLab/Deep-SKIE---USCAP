@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Aug 27 10:41:02 2019
+Created on Tue Aug 27 12:04:58 2019
 
 @author: d8
 """
 
+
 import numpy as np
 np.random.seed(1337)
+
 
 from keras.optimizers import SGD
 from keras.preprocessing.image import ImageDataGenerator
@@ -14,13 +16,12 @@ from keras.layers import Dense
 from keras.applications.inception_v3 import InceptionV3
 from keras.models import Model
 from keras.layers import GlobalAveragePooling2D
-import os
 
+import os
 import tensorflow as tf
-os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID";  # GPU ID 
+os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID";  # GPU ID
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 #import matplotlib.pyplot as plt
-
 import keras
 from tensorflow.python.client import device_lib
 print(device_lib.list_local_devices())
@@ -40,6 +41,7 @@ nb_validation_samples = 1400
 EPOCHS = 10
 batch_size = 32#16
 
+
 base_model = InceptionV3(weights='imagenet', include_top=False)
 
 x = base_model.output
@@ -52,18 +54,17 @@ model = Model(inputs=base_model.input, outputs=predictions)
 for layer in base_model.layers:
     layer.trainable = False
 
-
 train_datagen = ImageDataGenerator(rescale=1./255)
 validation_datagen = ImageDataGenerator(rescale=1./255)
 
 train_generator = train_datagen.flow_from_directory(
-                        '/hdd/d8/Ki67_3patch/HE_staintest/Train',
+                        '/hdd/d8/Ki67_3patch/Syn_staintest/Train',
                         target_size=(img_height,img_width),
                         batch_size=batch_size,
                         class_mode='categorical')
 
 validation_generator = validation_datagen.flow_from_directory(
-                            '/hdd/d8/Ki67_3patch/HE_staintest/Validation',
+                            '/hdd/d8/Ki67_3patch/Syn_staintest/Validation',
                             target_size=(img_height,img_width),
                             batch_size=batch_size,
                             class_mode='categorical')
@@ -84,7 +85,8 @@ history = model.fit_generator(
 
 
 model.summary()
-model.save('V3_myModel_HEStain_E10M9B32.h5')  
+
+model.save('V3_myModel_SynStain_E10M9B32.h5')  
 
 #f1 = plt.figure()
 #plt.plot(history.history['binary_accuracy'])
@@ -94,7 +96,7 @@ model.save('V3_myModel_HEStain_E10M9B32.h5')
 #plt.xlabel('Epoch')
 #plt.legend(['Train_acc', 'Validation_acc'], loc='upper left')
 #plt.show()
-#f1.savefig("HEStain_10E.png",format='png', dpi=1200)
+#f1.savefig("SynStain1_E10.png",format='png', dpi=1200)
 #
 #f2= plt.figure()
 #plt.plot(history.history['loss'])
@@ -104,4 +106,4 @@ model.save('V3_myModel_HEStain_E10M9B32.h5')
 #plt.xlabel('Epoch')
 #plt.legend(['Train_loss', 'Validation_loss'], loc='upper left')
 #plt.show()
-#f2.savefig("HEStain2_10E.png",format='png', dpi=1200)
+#f2.savefig("SynStain2_E10.png",format='png', dpi=1200)
