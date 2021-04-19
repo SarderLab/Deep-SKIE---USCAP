@@ -43,7 +43,9 @@ batch_size = 32#16
 
 
 base_model = InceptionV3(weights='imagenet', include_top=False)
-
+#for layer in base_model.layers:
+#    layer.trainable = False
+    
 x = base_model.output
 x = GlobalAveragePooling2D()(x)
 x = Dense(1024, activation='relu')(x)
@@ -51,8 +53,7 @@ predictions = Dense(4, activation='softmax')(x)
 
 model = Model(inputs=base_model.input, outputs=predictions)
 
-for layer in base_model.layers:
-    layer.trainable = False
+
 
 train_datagen = ImageDataGenerator(rescale=1./255)
 validation_datagen = ImageDataGenerator(rescale=1./255)
