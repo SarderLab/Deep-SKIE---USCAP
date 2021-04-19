@@ -40,8 +40,8 @@ EPOCHS = 10
 batch_size = 32#16
 
 base_model = InceptionV3(weights='imagenet', include_top=False)
-for layer in base_model.layers:
-    layer.trainable = False
+#for layer in base_model.layers:
+#    layer.trainable = False
     
 x = base_model.output
 x = GlobalAveragePooling2D()(x)
