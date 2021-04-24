@@ -14,25 +14,9 @@ from keras.layers import Dense
 from keras.applications.inception_v3 import InceptionV3
 from keras.models import Model
 from keras.layers import GlobalAveragePooling2D
-import os
-
 import tensorflow as tf
-os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID";  # GPU ID 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-#import matplotlib.pyplot as plt
-
 import keras
-from tensorflow.python.client import device_lib
-print(device_lib.list_local_devices())
 
-
-
-keras.backend.set_learning_phase(0)
-keras.backend.set_image_dim_ordering('tf')
-
-config = tf.ConfigProto( device_count = {'GPU': 1 } ) 
-sess = tf.Session(config=config) 
-keras.backend.set_session(sess)
 
 img_width, img_height = 250,250
 nb_train_samples = 13525
@@ -41,8 +25,7 @@ EPOCHS = 10
 batch_size = 32#16
 
 base_model = InceptionV3(weights='imagenet', include_top=False)
-#for layer in base_model.layers:
-#    layer.trainable = False
+
     
 x = base_model.output
 x = GlobalAveragePooling2D()(x)
