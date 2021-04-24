@@ -4,24 +4,16 @@ Created on Tue Aug 27 12:10:11 2019
 
 @author: d8
 """
-
 import numpy as np
-np.random.seed(1337)
-
-from keras.optimizers import SGD
 from keras.preprocessing.image import ImageDataGenerator
-from keras.layers import Dense
-from keras.applications.inception_v3 import InceptionV3
 from keras.models import Model
-from keras.layers import GlobalAveragePooling2D
-import tensorflow as tf
-import keras
+from keras.applications.inception_v3 import InceptionV3
+from keras.layers import Dense, GlobalAveragePooling2D
+from keras.optimizers import SGD
 
 img_width, img_height = 250,250
 nb_train_samples = 13525
 nb_validation_samples = 1400
-EPOCHS = 10
-batch_size = 32#16
 
 base_model = InceptionV3(weights='imagenet', include_top=False)
     
@@ -31,6 +23,7 @@ x = Dense(1024, activation='relu')(x)
 predictions = Dense(4, activation='softmax')(x)
 
 model = Model(inputs=base_model.input, outputs=predictions)
+
 
 train_datagen = ImageDataGenerator(rescale=1./255)
 validation_datagen = ImageDataGenerator(rescale=1./255)
@@ -47,6 +40,9 @@ validation_generator = validation_datagen.flow_from_directory(
                             batch_size=batch_size,
                             class_mode='categorical')
 
+
+EPOCHS = 10
+batch_size = 32
 lrate = 0.1
 decayrate = lrate/EPOCHS
 opt = SGD(lr=lrate, momentum = 0.9,decay = decayrate)
