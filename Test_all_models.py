@@ -8,23 +8,10 @@ Created on Tue Aug 27 12:22:10 2019
 from keras.models import load_model
 import numpy as np
 from keras.preprocessing.image import ImageDataGenerator
-import os
 import pandas as pd
 import tensorflow as tf
-
-os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID";  # GPU ID
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-
 import keras
-from tensorflow.python.client import device_lib
-print(device_lib.list_local_devices())
 
-keras.backend.set_learning_phase(0)
-keras.backend.set_image_dim_ordering('tf')
-
-config = tf.ConfigProto( device_count = {'GPU': 1 } ) 
-sess = tf.Session(config=config) 
-keras.backend.set_session(sess)
 
 img_width, img_height = 250,250
 BATCH_SZ = 32
