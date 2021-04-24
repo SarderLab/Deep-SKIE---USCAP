@@ -6,8 +6,6 @@ Created on Tue Aug 27 10:41:02 2019
 """
 
 import numpy as np
-np.random.seed(1337)
-
 from keras.optimizers import SGD
 from keras.preprocessing.image import ImageDataGenerator
 from keras.layers import Dense
